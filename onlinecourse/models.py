@@ -73,7 +73,7 @@ class Lesson(models.Model):
     title = models.CharField(max_length=200, default="title")
     order = models.IntegerField(default=0)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    content = models.TextField()
+    content = models.TextField(default="some details")
 
 
 # Enrollment model
@@ -98,8 +98,8 @@ class Enrollment(models.Model):
 
 class Question(models.Model):
     question = models.ForeignKey(Course, on_delete=models.CASCADE)
-    text = models.TextField()
-    grade = models.IntegerField()
+    text = models.TextField(default="some")
+    grade = models.IntegerField(default=1)
 
     def is_get_score(self, selected_ids):
        all_answers = self.choice_set.filter(is_correct=True).count()
@@ -112,8 +112,8 @@ class Question(models.Model):
 
 class Choice(models.Model):
     choice = models.ForeignKey(Question, on_delete=models.CASCADE)
-    context = models.TextField()
-    is_correct = models.BooleanField()
+    context = models.TextField(default="some")
+    is_correct = models.BooleanField(default=True)
 
 
 class Submission(models.Model):
